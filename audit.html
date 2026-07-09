@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Redesign Notes — Audit of amitommd.com</title>
+<meta name="description" content="What's wrong with the current amitommd.com and what this redesign concept fixes.">
+<meta name="robots" content="noindex">
+<link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<style>
+  .audit-body { max-width: 760px; }
+  .audit-body h2 { margin: 52px 0 16px; }
+  .audit-body ul { padding-left: 22px; display: grid; gap: 12px; margin-top: 14px; }
+  .audit-body li { color: var(--ink-2); }
+  .audit-body li strong { color: var(--ink); }
+  .audit-body table { border-collapse: collapse; width: 100%; margin-top: 18px; font-size: 0.92rem; }
+  .audit-body th, .audit-body td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--line); }
+  .audit-body th { font-family: var(--mono); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--teal); }
+  .swatches { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 18px; }
+  .swatch { width: 108px; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; background: #fff; }
+  .swatch i { display: block; height: 56px; }
+  .swatch span { display: block; font-family: var(--mono); font-size: 0.65rem; padding: 8px 9px; color: var(--ink-2); }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap nav-bar">
+    <a class="wordmark" href="index.html">
+      <span class="name">Amit Om, MD</span>
+      <span class="spec">Redesign Concept — Notes</span>
+    </a>
+    <ul class="nav-links" style="display:flex">
+      <li><a href="index.html">← Back to the demo</a></li>
+    </ul>
+  </div>
+</header>
+
+<main class="section">
+  <div class="wrap audit-body">
+    <span class="eyebrow">Redesign Notes · July 2026</span>
+    <h1>What's wrong with the current site, and what this demo fixes</h1>
+    <p class="lede" style="margin-top:16px">The live amitommd.com runs WordPress + Elementor with six plugins. It has good raw material — real credentials, real photos, real reviews — buried under performance, SEO, and trust problems. The details:</p>
+
+    <h2>1 · Performance</h2>
+    <ul>
+      <li><strong>A 4-second artificial preloader</strong> delays every page view on purpose (Preloader Plus is configured with a 4000ms delay). This is the single most costly issue on the site.</li>
+      <li><strong>22 CSS files and 33 script tags</strong> load on the homepage — jQuery, Swiper, emoji polyfills, Instagram embeds — before any content shows.</li>
+      <li><strong>The logo ships at 1930×1493px</strong> (97KB, marked highest priority) to render ~100px tall — alongside a second logo variant and a 528KB animated logo GIF.</li>
+      <li><strong>4 font families in all 18 weights each</strong> (72 variations) are requested; the design uses about 3.</li>
+      <li><strong>The For Patients page is 312KB of HTML</strong> with 20+ Instagram reel embeds and 33 gallery images loading up front.</li>
+    </ul>
+
+    <h2>2 · SEO &amp; metadata</h2>
+    <ul>
+      <li><strong>The homepage title is literally "amitommd."</strong> Not "dermatologist," not "Mohs," not "Charlotte." That's the headline Google shows.</li>
+      <li><strong>No meta descriptions, no Open Graph tags, no structured data</strong> — search snippets are improvised and shared links show as bare URLs.</li>
+      <li><strong>No <code>&lt;h1&gt;</code> exists on any page</strong>, and paragraphs are nested inside headings (invalid HTML). Heading levels are chosen for looks, not meaning.</li>
+    </ul>
+
+    <h2>3 · Content &amp; trust</h2>
+    <ul>
+      <li><strong>The surgical gallery is placeholder content.</strong> All 19 "cases" (scalp, forehead, temple, cheek, nose, ears) show the same three photos of one forehead case, and several captions describe the wrong body part. This is the most persuasive page a surgeon can have — and it currently collapses on inspection.</li>
+      <li><strong>Two AI-generated images sit where credibility matters most:</strong> the Expert Witness portrait is an unedited Midjourney render (the filename still contains the AI prompt) and the telemedicine illustration is an AI cartoon.</li>
+      <li><strong>"Starting September 2…" has no year and has long passed.</strong> It should read "Now seeing patients at Dermatology Group of the Carolinas."</li>
+      <li><strong>The copy buries the good stuff.</strong> Formulaic filler ("a distinguished practitioner committed to…") hides genuinely differentiating facts: double board certification, ACGME fellowship, 23 publications, 27,000+ telemedicine patients.</li>
+      <li><strong>The stat counters render as "0"</strong> (0 Publications, 0 Awards) for search engines and anyone scrolling fast — the real numbers only appear after a JS animation.</li>
+    </ul>
+
+    <h2>4 · UI / visual design</h2>
+    <ul>
+      <li><strong>No coherent identity:</strong> default Elementor styling, red buttons clashing with a blue/teal logo, four typefaces, per-widget font sizes.</li>
+      <li><strong>The script logo is a low-res background-removed photo</strong> with visible fringing, shipped in six crops.</li>
+      <li><strong>The education section is a wall of clashing logos</strong> (black VCU banner, garnet FSU seal, white MUSC JPEG) in mismatched shapes and backgrounds.</li>
+      <li><strong>Testimonials show empty star ratings and gray avatar placeholders.</strong></li>
+    </ul>
+
+    <h2>5 · UX &amp; accessibility</h2>
+    <ul>
+      <li><strong>Every image has empty alt text</strong> — invisible to screen readers and to Google Images.</li>
+      <li><strong>Graphic surgical photos appear with no warning;</strong> the "viewer discretion" note sits below the photos it warns about.</li>
+      <li><strong>The "Make Appointment" button is hidden on mobile and tablet</strong> — the devices most patients use.</li>
+      <li><strong>"Consulting" lives at /telemedicine/</strong> — the nav label, page heading, and URL all disagree.</li>
+    </ul>
+
+    <h2>6 · Technical</h2>
+    <ul>
+      <li>WordPress + 6 plugins means hosting fees, updates, and security patches forever — for a 5-page brochure. A static site is free, faster, and has no attack surface (the current site exposes xmlrpc.php and its WordPress version).</li>
+    </ul>
+
+    <h2>The redesign, side by side</h2>
+    <table>
+      <tr><th></th><th>Current site</th><th>This demo</th></tr>
+      <tr><td>Time to content</td><td>~4s preloader + heavy assets</td><td>Instant, static HTML</td></tr>
+      <tr><td>Homepage requests</td><td>55+</td><td>~15</td></tr>
+      <tr><td>Google title</td><td>"amitommd"</td><td>"Amit Om, MD — Mohs Surgeon &amp; Dermatologist in Charlotte, NC"</td></tr>
+      <tr><td>Gallery</td><td>19 duplicate placeholder cases</td><td>1 real case, honest labels, graphic-content opt-in</td></tr>
+      <tr><td>Alt text</td><td>None</td><td>Every image</td></tr>
+      <tr><td>Hosting</td><td>WordPress hosting + plugin licenses</td><td>$0 — GitHub Pages</td></tr>
+    </table>
+
+    <h2>The new identity in one glance</h2>
+    <p style="color:var(--ink-2)">Warm ivory instead of clinical white, deep teal instead of stock medical blue, serif headlines with journal heritage — and one signature detail: <strong style="color:var(--violet)">gentian violet</strong>, the color of the marker every Mohs surgeon uses to draw tumor margins, visible in Dr. Om's own case photos. It circles one phrase in the hero and numbers the surgical cases.</p>
+    <div class="swatches">
+      <div class="swatch"><i style="background:#FAF7F1"></i><span>paper #FAF7F1</span></div>
+      <div class="swatch"><i style="background:#F2ECE1"></i><span>tint #F2ECE1</span></div>
+      <div class="swatch"><i style="background:#175A52"></i><span>teal #175A52</span></div>
+      <div class="swatch"><i style="background:#0E3B35"></i><span>deep #0E3B35</span></div>
+      <div class="swatch"><i style="background:#5B3E8F"></i><span>marker #5B3E8F</span></div>
+      <div class="swatch"><i style="background:#22302D"></i><span>ink #22302D</span></div>
+    </div>
+    <p style="margin-top:28px"><a href="index.html">← Back to the demo</a></p>
+  </div>
+</main>
+
+<script src="js/main.js"></script>
+</body>
+</html>
