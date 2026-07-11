@@ -1,12 +1,12 @@
 # CLAUDE.md
 
-Unofficial redesign demo of amitommd.com (Dr. Amit Om — Aryan's cousin; Mohs surgeon, Charlotte NC).
+The live website of amitommd.com (Dr. Amit Om — Aryan's cousin; Mohs surgeon, Charlotte NC). Went live on the real domain 2026-07-11.
 
-- **Live:** https://arluigi.github.io/amitommd-redesign/ (GitHub Pages, `main` branch root, repo `Arluigi/amitommd-redesign`)
+- **Live:** https://amitommd.com (GitHub Pages, `main` branch root, repo `Arluigi/amitommd-redesign`, custom domain via `CNAME` file + Hostinger DNS)
 - Plain static HTML/CSS + `js/main.js`. No build step — edit, commit, push to deploy.
-- Repo must stay **public** (free-plan Pages requirement).
-- `AUDIT.md` = critique of the current live site (rendered at `/audit.html`); `STYLE-GUIDE.md` = design tokens/voice rules.
-- Original site is WordPress on Hostinger (`platform: hostinger` header); domain + Titan email also at Hostinger.
+- Repo must stay **public** (free-plan Pages requirement). Don't delete the `CNAME` file or the domain unbinds.
+- DNS stays at Hostinger (registrar + Titan email — MX/SPF/DKIM records must never be touched). Apex A → 185.199.108–111.153, `www` CNAME → arluigi.github.io.
+- `AUDIT.md` = critique of the old WordPress site (rendered at `/audit.html`, noindex); `STYLE-GUIDE.md` = design tokens/voice rules.
 
 ## Gotchas
 
@@ -14,14 +14,13 @@ Unofficial redesign demo of amitommd.com (Dr. Amit Om — Aryan's cousin; Mohs s
 - Scroll-reveal `.rv` elements are hidden only under `html.js` — don't remove the `classList.add('js')` line in `main.js`.
 - Contact stats sourced from the old site's animated counters: 23 publications, 9 state licenses, 27,194 telemedicine patients.
 
-## If cousin adopts the site (pending)
+## Remaining
 
-1. He updates Hostinger DNS: apex A records → 185.199.108/109/110/111.153, `www` CNAME → `arluigi.github.io` (tutorial already sent).
-2. Then: repo Settings → Pages → custom domain `amitommd.com` + enforce HTTPS (adds CNAME file).
-3. Remove "unofficial concept" footer disclaimer on all 6 HTML pages + README URLs; he cancels Hostinger web hosting (keeps domain + email).
+- Cousin can cancel the Hostinger **web hosting** plan (must keep domain registration + Titan email).
+- Nice-to-haves: real case photos for the gallery, Formspree contact form.
 
 ## Session Log
 
-### 2026-07-09
-- Completed: Audited amitommd.com (perf/SEO/content/UX findings in AUDIT.md), built 5-page static redesign + audit page + style guide, published to GitHub Pages, verified live. Sent cousin the Hostinger DNS tutorial.
-- Next: If he does the DNS change — flip custom domain in repo settings, drop demo disclaimers. Nice-to-haves: real case photos, Formspree contact form.
+### 2026-07-11
+- Completed: Domain cutover. Aryan edited Hostinger DNS (apex A → GitHub IPs, dropped Hostinger AAAA, `www` CNAME → arluigi.github.io); set custom domain on the repo, cert issued, HTTPS enforced, removed demo disclaimers (now © footer), rewrote README, added CNAME file (commit 2a4aa02). Verified live: https://amitommd.com serves the new site, www + HTTP redirect correctly.
+- Next: Remind cousin he can cancel Hostinger web hosting (keep domain + email). Nice-to-haves: real case photos, Formspree form.
