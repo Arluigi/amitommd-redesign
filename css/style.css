@@ -392,6 +392,8 @@ h3 { font-size: 1.35rem; }
 
 /* ---------- contact ---------- */
 .loc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 26px; }
+.loc-grid-single { grid-template-columns: minmax(0, 640px); justify-content: center; }
+.loc-grid-single .loc iframe { height: 320px; }
 .loc {
   background: var(--white);
   border: 1px solid var(--line);
